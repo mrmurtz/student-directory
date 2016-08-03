@@ -1,39 +1,43 @@
-# Put students into an array
-students = [
-  {name: "Dr. Hannibal Lecter", cohort: :november},
-  {name: "Darth Vader", cohort: :november},
-  {name: "Nurse Ratched", cohort: :november},
-  {name: "Michael Corleone", cohort: :november},
-  {name: "Alex DeLarge", cohort: :november},
-  {name: "The Wicked Witch of the West", cohort: :november},
-  {name: "Terminator", cohort: :november},
-  {name: "Fredy Krueger", cohort: :november},
-  {name: "The Joker", cohort: :november},
-  {name: "Joffrey Baratheon", cohort: :november},
-  {name: "Norman Bates", cohort: :november}
-]
+def input_students
+  puts "Add a name to the list. (Once complete hit enter twice)"
+  #empty array to store hash of student and cohort
+  students = []
+  #getting the students name in a variable
+  name = gets.chomp
+  while !name.empty? do
+    #adding the variable to the array
+    students << {name: name, cohort: :november}
+    puts "Now we have #{students.count} students."
+    puts "Add another name (or hit enter twice to exit)"
+    # get another name
+    name = gets.chomp
+  end
+  #return students array
+  return students
+end
 
 #Method to print header
 def print_header
   puts
   puts "The students of Villains Academy"
   puts "---------------"
+  puts
 end
 
-# Metho to print list of students
-def print(names)
-  names.each do |name|
-    puts "#{name[:name]} (#{name[:cohort]} cohort)"
+
+def print(students)
+  students.each do | student |
+    puts "#{student[:name]} (#{student[:cohort]} cohort)"
   end
 end
 
 #Method to print footer with count
- def print_footer(names)
-   puts "Overall we have #{names.count} great students."
-   puts
- end
+def print_footer(students)
+  puts "Overall we have #{students.count} great students."
+  puts
+end
 
-#Body of the code
- print_header
- print(students)
- print_footer(students)
+students = input_students
+print_header
+print(students)
+print_footer(students)
