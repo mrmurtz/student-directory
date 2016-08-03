@@ -1,16 +1,16 @@
 # Put students into an array
 students = [
-  "Dr. Hannibal Lecter",
-  "Darth Vader",
-  "Nurse Ratched",
-  "Michael Corleone",
-  "Alex DeLarge",
-  "The Wicked Witch of the West",
-  "Terminator",
-  "Fredy Krueger",
-  "The Joker",
-  "Joffrey Baratheon",
-  "Norman Bates"
+  {name: "Dr. Hannibal Lecter", cohort: :november},
+  {name: "Darth Vader", cohort: :november},
+  {name: "Nurse Ratched", cohort: :november},
+  {name: "Michael Corleone", cohort: :november},
+  {name: "Alex DeLarge", cohort: :november},
+  {name: "The Wicked Witch of the West", cohort: :november},
+  {name: "Terminator", cohort: :november},
+  {name: "Fredy Krueger", cohort: :november},
+  {name: "The Joker", cohort: :november},
+  {name: "Joffrey Baratheon", cohort: :november},
+  {name: "Norman Bates", cohort: :november}
 ]
 
 #Method to print header
@@ -21,18 +21,19 @@ def print_header
 end
 
 # Metho to print list of students
-def print_students(names)
+def print(names)
   names.each do |name|
-    puts name
+    puts "#{name[:name]} (#{name[:cohort]} cohort)"
   end
 end
 
 #Method to print footer with count
  def print_footer(names)
    puts "Overall we have #{names.count} great students."
+   puts
  end
 
 #Body of the code
  print_header
- print_students(students)
+ print(students)
  print_footer(students)
