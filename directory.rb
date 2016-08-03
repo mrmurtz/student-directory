@@ -13,13 +13,26 @@ students = [
   "Norman Bates"
 ]
 
-# Print list of students
-puts
-puts "The students of Villains Academy"
-puts "---------------"
-students.each do |student|
-  puts student
+#Method to print header
+def print_header
+  puts
+  puts "The students of Villains Academy"
+  puts "---------------"
 end
 
-#Print student count
-puts "Overall we have #{students.count} great students."
+# Metho to print list of students
+def print_students(names)
+  names.each do |name|
+    puts name
+  end
+end
+
+#Method to print footer with count
+ def print_footer(names)
+   puts "Overall we have #{names.count} great students."
+ end
+
+#Body of the code
+ print_header
+ print_students(students)
+ print_footer(students)
