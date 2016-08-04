@@ -27,7 +27,7 @@ end
 #method to print students name and default cohort
 def print(students)
   students.each_with_index do | student, index |
-    if student[:name].downcase.include? "m" #downcase to cover both capitalised and non capitalised names
+    if student[:name].length < 12 #find length of string and if = or more less than 12 then...
     puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
   end
   end
