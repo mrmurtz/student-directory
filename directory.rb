@@ -5,7 +5,7 @@ def input_students
   #getting the students name in a variable
   name = gets.chomp
   while !name.empty? do
-    #adding the variable to the array
+    #adding the name and default cohort as a HASH{ , } to the array
     students << {name: name, cohort: :november}
     puts "Now we have #{students.count} students."
     puts "Add another name (or hit enter twice to exit)"
@@ -24,10 +24,10 @@ def print_header
   puts
 end
 
-
+#method to print students name and default cohort
 def print(students)
-  students.each do | student |
-    puts "#{student[:name]} (#{student[:cohort]} cohort)"
+  students.each_with_index do | student, index |
+    puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
   end
 end
 
