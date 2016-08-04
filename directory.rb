@@ -27,7 +27,9 @@ end
 #method to print students name and default cohort
 def print(students)
   students.each_with_index do | student, index |
+    if student[:name].downcase.include? "m" #downcase to cover both capitalised and non capitalised names
     puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
+  end
   end
 end
 
@@ -41,3 +43,5 @@ students = input_students
 print_header
 print(students)
 print_footer(students)
+
+#if student name starts with "m"  then print else do not print
