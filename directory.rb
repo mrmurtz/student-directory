@@ -5,8 +5,15 @@ def input_students
   #getting the students name in a variable
   name = gets.chomp
   while !name.empty? do
-    #adding the name and default cohort as a HASH{ , } to the array
-    students << {name: name, cohort: :november}
+
+    # ask for which country they are from
+    puts "Which country are they from?"
+    country = gets.chomp
+
+    # ask for hobbies
+    puts "Any hobbies?"
+    hobby = gets.chomp
+    students << {name: name, cohort: :november, countries: country, hobbies: hobby}
     puts "Now we have #{students.count} students."
     puts "Add another name (or hit enter twice to exit)"
     # get another name
@@ -24,24 +31,32 @@ def print_header
   puts
 end
 
-#method to print students name and default cohort
+#Using each to print students with index also Capitalize puts of name
 def print(students)
-  students.each_with_index do | student, index |
-    if student[:name].length < 12 #find length of string and if = or more less than 12 then...
-    puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
-  end
-  end
+ students.each_with_index do | student, index |
+   puts "#{index+1}. #{student[:name].capitalize} (#{student[:cohort].capitalize}'s' cohort) from #{student[:countries].capitalize}, Enjoys #{student[:hobbies]}"
+ end
 end
+
+# Can't get while to work for excercise 8.4
+# def print(students)
+# 		index = 0
+# 		while students.length >= index+1
+# 			puts "#{index+1}. #{students[:name]} (#{students[:cohort]} cohort)"
+# 			index+=1
+# 		end
+# end
+
 
 #Method to print footer with count
 def print_footer(students)
+  puts
   puts "Overall we have #{students.count} great students."
   puts
 end
+
 
 students = input_students
 print_header
 print(students)
 print_footer(students)
-
-#if student name starts with "m"  then print else do not print
