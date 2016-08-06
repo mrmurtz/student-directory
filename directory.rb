@@ -26,15 +26,15 @@ end
 #Method to print header
 def print_header
   puts
-  puts "The students of Villains Academy"
-  puts "---------------"
+  puts "The students of Villains Academy".center(50)
+  puts "---------------".center(50)
   puts
 end
 
 #Using each to print students with index also Capitalize puts of name
 def print(students)
  students.each_with_index do | student, index |
-   puts "#{index+1}. #{student[:name].capitalize} (#{student[:cohort].capitalize}'s' cohort) from #{student[:countries].capitalize}, Enjoys #{student[:hobbies]}"
+   puts "#{index+1}. #{student[:name].capitalize} (#{student[:cohort].capitalize}'s cohort) from #{student[:countries].capitalize}, Enjoys #{student[:hobbies]}"
  end
 end
 
