@@ -2,7 +2,6 @@ def input_students
   puts "Add a name to the list. (Once complete hit enter twice)"
   #empty array to store hash of student and cohort
   students = []
-  cohort_months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
   name = gets.chomp
   # while the name of the student is not empty
   while !name.empty? do
@@ -46,13 +45,30 @@ end
 #  end
 # end
 
-# C [index][:cohort} should work, as then you’re directing it to a certain hash within the array
+# Using while instead of each -  advise from group [index][:cohort} should work, as then you’re directing it to a certain hash within the array
+# def print(students)
+# 		index = 0
+# 		while students.length >= index+1
+# 			puts "#{index+1}. #{students[index][:name].capitalize} (#{students[index][:cohort].capitalize} cohort)"
+# 			index+=1
+# 		end
+# end
+
 def print(students)
-		index = 0
-		while students.length >= index+1
-			puts "#{index+1}. #{students[index][:name].capitalize} (#{students[index][:cohort].capitalize} cohort)"
-			index+=1
-		end
+  #find all the cohorts first
+  cohorts = [] #add them to an array
+  students.map do |student| # use map to return each value
+    cohorts << student[:cohort] #write into new array the cohorts that were listed
+    cohorts = cohorts.uniq # now narrow this down to only the unique cohorts (remove duplicates)
+  end
+  cohorts.each do |cohort| # now on every item in the new cohorts array create a title
+    puts "*#{cohort.capitalize} cohort students*"
+    students.each do |student| # with each student in the students array if the student cohort matches cohort in above each method then puts them
+      if student[:cohort] == cohort
+        puts "#{student[:name]}"
+      end
+    end
+  end
 end
 
 
