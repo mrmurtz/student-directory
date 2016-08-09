@@ -87,6 +87,12 @@ end
 
 
 students = input_students
-print_header
-print(students)
-print_footer(students)
+
+if students.length != 0
+  print_header
+  print(students)
+  print_footer(students)
+else
+  puts "Whoa wtf! Looks like you didn't add any students."
+  puts ""
+end
