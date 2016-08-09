@@ -2,20 +2,26 @@ def input_students
   puts "Add a name to the list. (Once complete hit enter twice)"
   #empty array to store hash of student and cohort
   students = []
-  #getting the students name in a variable
+  cohort_months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
   name = gets.chomp
+  # while the name of the student is not empty
   while !name.empty? do
     #ask for cohort
     puts "Which cohort will they be enrolled?"
-    cohort = gets.chomp
+    cohort = gets.chomp.capitalize.to_sym
+    # if cohort is empty then :november else use the cohort given
+    if cohort.empty? == true
+      cohort = :november
+    end
 
-    # ask for which country they are from
-    puts "Which country are they from?"
-    country = gets.chomp
-    # ask for hobbies
-    puts "Any hobbies?"
-    hobby = gets.chomp
-    students << {name: name, cohort: cohort, countries: country, hobbies: hobby}
+    # # Checking for typos
+    # if cohort_months.include?(cohort) == false
+    #   puts "Did you spell the month correctly?"
+    #   cohort = gets.chomp.capitalize.to_sym
+    # end
+
+    # adding the student hash to the array
+    students << {name: name, cohort: cohort}
     puts "Now we have #{students.count} students."
     puts "Add another name (or hit enter twice to exit)"
     # get another name
@@ -44,7 +50,7 @@ end
 def print(students)
 		index = 0
 		while students.length >= index+1
-			puts "#{index+1}. #{students[index][:name]} (#{students[index][:cohort]} cohort)"
+			puts "#{index+1}. #{students[index][:name].capitalize} (#{students[index][:cohort].capitalize} cohort)"
 			index+=1
 		end
 end
