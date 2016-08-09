@@ -1,7 +1,39 @@
-def input_students
-  puts "Add a name to the list. (Once complete hit enter twice)"
+#interactive menu
+
+def interactive_menu
   #empty array to store hash of student and cohort
   students = []
+  loop do
+    # 1. print the menu and ask the user what to do
+    puts "1. Input students"
+    puts "2. Show students"
+    puts "9. Exit"
+    selection = gets.chomp
+    case selection
+    when "1"
+      # run input_students
+      students = input_students
+    when "2"
+      if students.length != 0
+        print_header
+        print(students)
+        print_footer(students)
+      else
+        puts "Whoa wtf! Looks like you didn't add any students."
+        puts ""
+      end
+    when "9"
+      #exit the program
+    else
+      puts "I don't know what you mean, try again."
+    end
+    # 2. read the input and save it into a variable
+    # 3. do what the user has asked
+  end
+end
+
+def input_students
+  puts "Add a name to the list. (Once complete hit enter twice)"
   name = gets
   name.delete! "\n"
   # while the name of the student is not empty
@@ -85,14 +117,4 @@ def print_footer(students)
   puts
 end
 
-
-students = input_students
-
-if students.length != 0
-  print_header
-  print(students)
-  print_footer(students)
-else
-  puts "Whoa wtf! Looks like you didn't add any students."
-  puts ""
-end
+interactive_menu
