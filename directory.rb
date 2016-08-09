@@ -2,7 +2,8 @@ def input_students
   puts "Add a name to the list. (Once complete hit enter twice)"
   #empty array to store hash of student and cohort
   students = []
-  name = gets.chomp
+  name = gets
+  name.delete! "\n"
   # while the name of the student is not empty
   while !name.empty? do
     #ask for cohort
