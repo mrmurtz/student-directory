@@ -1,120 +1,69 @@
-#interactive menu
-
-def interactive_menu
-  #empty array to store hash of student and cohort
-  students = []
-  loop do
-    # 1. print the menu and ask the user what to do
-    puts "1. Input students"
-    puts "2. Show students"
-    puts "9. Exit"
-    selection = gets.chomp
-    case selection
-    when "1"
-      # run input_students
-      students = input_students
-    when "2"
-      if students.length != 0
-        print_header
-        print(students)
-        print_footer(students)
-      else
-        puts "Whoa wtf! Looks like you didn't add any students."
-        puts ""
-      end
-    when "9"
-      #exit the program
-    else
-      puts "I don't know what you mean, try again."
-    end
-    # 2. read the input and save it into a variable
-    # 3. do what the user has asked
-  end
-end
+@students = [] #empty array accesible to all methods
 
 def input_students
   puts "Add a name to the list. (Once complete hit enter twice)"
-  name = gets
-  name.delete! "\n"
-  # while the name of the student is not empty
-  while !name.empty? do
-    #ask for cohort
-    puts "Which cohort will they be enrolled?"
-    cohort = gets.chomp.capitalize.to_sym
-    # if cohort is empty then :november else use the cohort given
-    if cohort.empty? == true
-      cohort = :november
-    end
-
-    # # Checking for typos
-    # if cohort_months.include?(cohort) == false
-    #   puts "Did you spell the month correctly?"
-    #   cohort = gets.chomp.capitalize.to_sym
-    # end
-
-    # adding the student hash to the array
-    students << {name: name, cohort: cohort}
-    if students.length <=1
-      puts "Now we have #{students.count} student."
-    else
-      puts "Now we have #{students.count} students."
-    end
-
-    puts "Add another name (or hit enter twice to exit)"
-    # get another name
-    name = gets.chomp
+  name = gets.chomp         # get the student's first name
+  while !name.empty? do     # while the name of the student is not empty
+    @students << {name: name, cohort: :november}   # adding the student hash to the array
+    puts "Now we have #{@students.count} students overall."
+    name = gets.chomp       # get another name
   end
-  #return students array
-  return students
 end
 
-#Method to print header
-def print_header
+def print_menu          #print menu method to puts options
+  puts "1. Input students"
+  puts "2. Show students"
+  puts "9. Exit"
+end
+
+def interactive_menu    #print the menu and process the user selection in a loop
+  loop do
+    print_menu
+    process(gets.chomp)
+  end
+end
+
+def show_students        #method to show students - runs if selection processed is "2"
+  if @students.length != 0
+    print_header
+    print_student_list
+    print_footer
+  else
+    puts "Whoa wtf! Looks like you didn't add any students."
+    puts ""
+  end
+end
+
+def process(selection)  #method to process the selection (selection passed as argument)
+  case selection
+  when "1"
+    input_students
+  when "2"
+    show_students
+  when "9"
+    exit #will cause the program to terminate
+  else
+    puts "I don't know what you mean, try again."
+  end
+end
+
+def print_header      # method to print header
   puts
   puts "The students of Villains Academy".center(50)
   puts "---------------".center(50)
   puts
 end
 
-#Using each to print students with index also Capitalize puts of name
-# def print(students)
-#  students.each_with_index do | student, index |
-#    puts "#{index+1}. #{student[:name].capitalize} (#{student[:cohort].capitalize} cohort) from #{student[:countries].capitalize}, Enjoys #{student[:hobbies]}"
-#  end
-# end
-
-# Using while instead of each -  advise from group [index][:cohort} should work, as then you’re directing it to a certain hash within the array
-# def print(students)
-# 		index = 0
-# 		while students.length >= index+1
-# 			puts "#{index+1}. #{students[index][:name].capitalize} (#{students[index][:cohort].capitalize} cohort)"
-# 			index+=1
-# 		end
-# end
-
-def print(students)
-  #find all the cohorts first
-  cohorts = [] #add them to an array
-  students.map do |student| # use map to return each value
-    cohorts << student[:cohort] #write into new array the cohorts that were listed
-    cohorts = cohorts.uniq # now narrow this down to only the unique cohorts (remove duplicates)
-  end
-  cohorts.each do |cohort| # now on every item in the new cohorts array create a title
-    puts "*#{cohort.capitalize} cohort students*"
-    students.each do |student| # with each student in the students array if the student cohort matches cohort in above each method then puts them
-      if student[:cohort] == cohort
-        puts "#{student[:name]}"
-      end
-    end
+def print_student_list  # method to print student list
+  @students.each do |student|
+    puts "#{student[:name].capitalize} - #{student[:cohort].capitalize} cohort"
   end
 end
 
-
-#Method to print footer with count
-def print_footer(students)
+def print_footer        # method to print footer
   puts
-  puts "Overall we have #{students.count} great students."
+  puts "Overall we have #{@students.count} great students."
   puts
 end
 
-interactive_menu
+interactive_menu      # calling the menu method
