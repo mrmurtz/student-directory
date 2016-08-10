@@ -13,7 +13,8 @@ end
 def print_menu          #print menu method to puts options
   puts "1. Input students"
   puts "2. Show students"
-  puts "3. Save students to csv"
+  puts "3. Save students to file"
+  puts "4. Load students file"
   puts "9. Exit"
 end
 
@@ -43,6 +44,8 @@ def process(selection)  #method to process the selection (selection passed as ar
     show_students
   when "3"
     save_students_csv
+  when "4"
+    load_students
   when "9"
     exit #will cause the program to terminate
   else
@@ -76,6 +79,17 @@ def save_students_csv
     student_data = [student[:name], student[:cohort]]
     csv_line = student_data.join(",")
     file.puts csv_line
+
+  end
+  puts "#{@students.count} students saved to file."
+  file.close
+end
+
+def load_students
+  file = File.open("students.csv", "r") # open file with read access
+  file.readlines.each do |line|
+    name, cohort = line.chomp.split(",")
+    @students << {name: name, cohort: cohort.to_sym}
   end
   file.close
 end
