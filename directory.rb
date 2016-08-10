@@ -13,6 +13,7 @@ end
 def print_menu          #print menu method to puts options
   puts "1. Input students"
   puts "2. Show students"
+  puts "3. Save students to csv"
   puts "9. Exit"
 end
 
@@ -40,6 +41,8 @@ def process(selection)  #method to process the selection (selection passed as ar
     input_students
   when "2"
     show_students
+  when "3"
+    save_students_csv
   when "9"
     exit #will cause the program to terminate
   else
@@ -64,6 +67,17 @@ def print_footer        # method to print footer
   puts
   puts "Overall we have #{@students.count} great students."
   puts
+end
+
+def save_students_csv
+  # open file to save to
+  file = File.open("students.csv", "w") # we can now use file as the variable name for the csv file
+  @students.each do |student|           # iterate over students array to covert each student and cohort into student_data string
+    student_data = [student[:name], student[:cohort]]
+    csv_line = student_data.join(",")
+    file.puts csv_line
+  end
+  file.close
 end
 
 interactive_menu      # calling the menu method
